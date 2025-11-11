@@ -40,7 +40,12 @@ class WildFileChunkedUpload {
 			'file_size' => intval($range_values[3]),
 		];
 	}
-	public static function from_input($storage = null, $dir = null, $metadata = null, $subfolder = null){
+	public static function from_input(
+		?string $storage = null,
+		?string $dir = null,
+		?array $metadata = null,
+		?string $subfolder = null
+	){
 		if(!isset($metadata)){
 			$metadata = self::read_input_headers();
 		}
@@ -82,9 +87,9 @@ class WildFileChunkedUpload {
 		int $range_end,
 		private int $size_input,
 		private string $checksum_input,
-		string $storage = null,
-		string $dir = null,
-		string $subfolder = null,
+		?string $storage = null,
+		?string $dir = null,
+		?string $subfolder = null,
 		private ?string $transfer_input = null,
 		public readonly ?string $name = null,
 		public readonly ?string $mime = null,
