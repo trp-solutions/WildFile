@@ -93,5 +93,7 @@ $onclick = "location.href='import.php?type=server'";
 $body->el('button',['onclick'=>$onclick,'type'=>'button'])->te('$_SERVER');
 $onclick = "location.href='import.php?type=phpversion'";
 $body->el('button',['onclick'=>$onclick,'type'=>'button'])->te('phpversion()');
+$onclick = "location.href='store.php'";
+$body->el('button',['onclick'=>$onclick,'type'=>'button'])->te('LICENSE');
 
 echo $doc;

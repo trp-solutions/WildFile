@@ -95,7 +95,8 @@ class WildFile {
 			$this->checksum_check($checksum,$checksum_input);
 		}
 		$this->auto_value($field, [
-			self::CHECKSUM => $checksum
+			self::CHECKSUM => $checksum,
+			self::SIZE => filesize($uri),
 		]);
 		$id = $this->db_store($field);
 		$this->validate_id($id);
