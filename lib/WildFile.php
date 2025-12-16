@@ -90,6 +90,17 @@ class WildFile {
 		}
 	}
 	public function store_file($uri, $field = [], $checksum_input = null){
+		/* DEPRECATED */
+		$this->log('WildFile->store_file is deprecated. Use WildFile->store_file_move or WildFile->store_file_copy instead', LOG_NOTICE);
+		$this->store_file_move($uri, $field, $checksum_input);
+	}
+	public function store_file_copy($uri, $field = [], $checksum_input = null){
+		$this->store_file_internal(true, $uri, $field, $checksum_input);
+	}
+	public function store_file_move($uri, $field = [], $checksum_input = null){
+		$this->store_file_internal(false, $uri, $field, $checksum_input);
+	}
+	private function store_file_internal(bool $copy, $uri, $field = [], $checksum_input = null){
 		$checksum = hash_file('sha256',$uri);
 		if(func_num_args()===3){
 			$this->checksum_check($checksum,$checksum_input);
@@ -102,8 +113,14 @@ class WildFile {
 		$this->validate_id($id);
 		$path = $this->create_path($id);
 		$filename = $this->filename($id);
-		if(rename($uri, $path.$filename)===false) {
-			$this->exception('Error store_file: '.$path);
+		if($copy){
+			if(copy($uri, $path.$filename)===false) {
+				$this->exception('Error store_file: '.$path);
+			}
+		} else {
+			if(rename($uri, $path.$filename)===false) {
+				$this->exception('Error store_file: '.$path);
+			}
 		}
 		$this->checksum_store($path,$filename,$checksum);
 		$this->log('store_file: '.$id.'|'.$path.$filename);

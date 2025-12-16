@@ -19,7 +19,7 @@ if($upload->complete()){
 	$fields['created'] = ['value'=>'NOW()','noescape'=>true];
 
 	$wf = new WildFile($mysqli,STORAGE,'files');
-	$file_id = $wf->store_file($upload->file_uri, $fields);
+	$file_id = $wf->store_file_move($upload->file_uri, $fields);
 } else {
 	$file_id = null;
 }
