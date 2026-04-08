@@ -15,6 +15,7 @@ var upload_handler = {
 		var ul = document.querySelector('#chunked_upload_files');
 		ul.append(li);
 
+		entry.li = li;
 		entry.progressElement = progress;
 	},
 	upload: function(entry){
@@ -30,6 +31,11 @@ var upload_handler = {
 	},
 	listfinish: function(filelist, successful_files, total_files){
 		console.log('Uploaded %o out of %o files.\n%o', successful_files, total_files, filelist);
+	},
+	listreset: function(filelist, removed_files){
+		for(let id in removed_files){
+			removed_files[id].li.remove();
+		}
 	}
 }
 
