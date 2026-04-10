@@ -29,6 +29,10 @@ var upload_handler = {
 		entry.progressElement.replaceWith("\u2705");
 		delete(entry.progressElement);
 	},
+	failure: function(entry, message){
+		entry.progressElement.replaceWith("\u274C "+message);
+		delete(entry.progressElement);
+	},
 	listfinish: function(filelist, successful_files, total_files){
 		console.log('Uploaded %o out of %o files.\n%o', successful_files, total_files, filelist);
 	},
