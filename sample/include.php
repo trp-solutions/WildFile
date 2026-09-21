@@ -4,7 +4,7 @@ WildFile is licensed under the Apache License 2.0 license
 https://github.com/trp-solutions/WildFile/blob/main/LICENSE
 */
 declare(strict_types=1);
-require_once('../../heal-document/lib/HealDocument.php'); // https://github.com/TRP-Solutions/heal-document
+require_once('../../HealDocument/lib/HealDocument.php'); // https://github.com/trp-solutions/HealDocument
 require_once('../lib/WildFile.php');
 
 define('STORAGE',__DIR__.'/../storage');
