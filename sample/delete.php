@@ -6,13 +6,13 @@ https://github.com/trp-solutions/WildFile/blob/main/LICENSE
 declare(strict_types=1);
 require_once('include.php');
 
-$wf = new WildFile($mysqli,STORAGE,'files','thumbnail');
+$wf = new \TRP\WildFile\WildFile($mysqli,STORAGE,'files','thumbnail');
 
 $fields = [];
 $fields['thumbnail'] = ['value'=>'NULL','noescape'=>true];
-$wf->evict($_GET['file_id'],$fields);
+$wf->evict((int) $_GET['file_id'],$fields);
 
-$wf = new WildFile($mysqli,STORAGE,'files');
-$wf->delete($_GET['file_id']);
+$wf = new \TRP\WildFile\WildFile($mysqli,STORAGE,'files');
+$wf->delete((int) $_GET['file_id']);
 
 header('Location: .');

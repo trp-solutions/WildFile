@@ -9,12 +9,12 @@ require_once('include.php');
 $doc = new \TRP\HealDocument\HealDocument();
 $html = $doc->el('html');
 $head = $html->el('head');
-$head->el('title')->te('wild-file :: sample');
+$head->el('title')->te('WildFile :: Sample');
 $head->el('script',['src'=>'../lib/WildFile.js']);
 $head->el('script',['src'=>'chunked_upload.js']);
 $body = $html->el('body')->el('center');
 
-$body->el('h2')->te('wild-file :: filelist');
+$body->el('h2')->te('WildFile :: Filelist');
 $missing_thumbnail = [];
 
 $sql = "SELECT `id`,`name`,`created`,`address`,`thumbnail`
@@ -28,13 +28,13 @@ elseif($query->num_rows) {
 	$table = $form->el('table');
 	$tr = $table->el('tr');
 	$tr->el('th');
-	$tr->el('th')->te('id');
+	$tr->el('th')->te('Id');
 	$tr->el('th');
-	$tr->el('th')->te('name');
-	$tr->el('th')->te('address');
-	$tr->el('th')->te('created');
-	$tr->el('th')->te('status');
-	$tr->el('th')->at(['colspan'=>2])->te('function');
+	$tr->el('th')->te('Name');
+	$tr->el('th')->te('Address');
+	$tr->el('th')->te('Created');
+	$tr->el('th')->te('Status');
+	$tr->el('th')->at(['colspan'=>2])->te('Function');
 	while($rs = $query->fetch_object()) {
 		$tr = $table->el('tr');
 		$tr->el('td')->el('input',['type'=>'checkbox','name'=>'zip[]','value'=>$rs->id]);
@@ -51,9 +51,9 @@ elseif($query->num_rows) {
 		$tr->el('td')->te($rs->created);
 		$tr->el('td')->el('font',['color'=>'green'])->te('OK');
 		$onclick = "location.href='download.php?file_id=".$rs->id."'";
-		$tr->el('td')->el('button',['onclick'=>$onclick,'type'=>'button'])->te('download');
+		$tr->el('td')->el('button',['onclick'=>$onclick,'type'=>'button'])->te('Download');
 		$onclick = "location.href='delete.php?file_id=".$rs->id."'";
-		$tr->el('td')->el('button',['onclick'=>$onclick,'type'=>'button'])->te('delete');
+		$tr->el('td')->el('button',['onclick'=>$onclick,'type'=>'button'])->te('Delete');
 	}
 	$form->el('input',['type'=>'submit','value'=>'Download ZIP']);
 }
@@ -61,14 +61,14 @@ else {
 	$body->el('strong')->te('No files!');
 }
 
-$body->el('h2')->te('wild-file :: upload');
+$body->el('h2')->te('WildFile :: Upload');
 $form = $body->el('form',['action'=>'upload.php','method'=>'post','enctype'=>'multipart/form-data']);
 $form->el('label',['for'=>'fileupload'])->te('Select file:');
 $form->el('input',['type'=>'file','name'=>'fileupload[]','id'=>'fileupload','multiple','required','onchange'=>'WildFile.checksum(this);']);
 $form->el('br');
 $form->el('input',['type'=>'submit','value'=>'Upload']);
 
-$body->el('h2')->te('wild-file :: chunked upload');
+$body->el('h2')->te('WildFile :: Chunked upload');
 $div = $body->el('div');
 $div->el('label',['for'=>'fileupload'])->te('Select file:');
 $div->el('input',['type'=>'file','name'=>'fileupload[]','id'=>'fileupload','multiple','required','onchange'=>'WildFile.list("upload123").add(this);']);
@@ -77,7 +77,7 @@ $div->el('button',['type'=>'button','onclick'=>'WildFile.list("upload123").uploa
 $div->el('button',['type'=>'button','onclick'=>'WildFile.list("upload123").reset();'])->te('Reset list');
 
 if($missing_thumbnail) {
-	$body->el('h2')->te('wild-file :: thumbnail');
+	$body->el('h2')->te('WildFile :: Thumbnail');
 	$form = $body->el('form',['action'=>'thumbnail.php','method'=>'post','enctype'=>'multipart/form-data']);
 	$form->el('label',['for'=>'thumbnail_id'])->te('Select file id:');
 	$select = $form->el('select',['name'=>'thumbnail_id','id'=>'thumbnail_id','required']);
@@ -89,7 +89,7 @@ if($missing_thumbnail) {
 	$form->el('input',['type'=>'submit','value'=>'Upload']);
 }
 
-$body->el('h2')->te('wild-file :: import');
+$body->el('h2')->te('WildFile :: Import');
 $onclick = "location.href='import.php?type=server'";
 $body->el('button',['onclick'=>$onclick,'type'=>'button'])->te('$_SERVER');
 $onclick = "location.href='import.php?type=phpversion'";

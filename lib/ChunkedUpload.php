@@ -4,8 +4,9 @@ WildFile is licensed under the Apache License 2.0 license
 https://github.com/trp-solutions/WildFile/blob/main/LICENSE
 */
 declare(strict_types=1);
+namespace TRP\WildFile;
 
-class WildFileChunkedUpload {
+class ChunkedUpload {
 	const STATUS_INCOMPLETE = 0;
 	const STATUS_COMPLETE = 1;
 
@@ -222,11 +223,11 @@ class WildFileChunkedUpload {
 		}
 		return $path;
 	}
-	protected static function exception($message){
+	protected static function exception(string $message) : void {
 		self::log($message,LOG_ERR);
 		throw new \Exception($message);
 	}
-	protected static function log($message,$priority = LOG_INFO){
+	protected static function log(string $message,int $priority = LOG_INFO) : void {
 		syslog($priority,$message);
 	}
 }

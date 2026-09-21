@@ -6,7 +6,7 @@ https://github.com/trp-solutions/WildFile/blob/main/LICENSE
 declare(strict_types=1);
 require_once('include.php');
 
-$wf = new WildFile($mysqli,STORAGE,'files');
+$wf = new \TRP\WildFile\WildFile($mysqli,STORAGE,'files');
 
 $fields = [];
 
@@ -24,8 +24,8 @@ elseif($_GET['type']=='phpversion') {
 // For demonstration
 $verify = hash('sha256',$string);
 
-$fields['size'] = ['auto'=>WildFile::SIZE];
-$fields['checksum'] = ['auto'=>WildFile::CHECKSUM];
+$fields['size'] = ['auto'=>\TRP\WildFile\WildFile::SIZE];
+$fields['checksum'] = ['auto'=>\TRP\WildFile\WildFile::CHECKSUM];
 $fields['address'] = ['value'=>$_SERVER['REMOTE_ADDR']];
 $fields['created'] = ['value'=>'NOW()','noescape'=>true];
 

@@ -11,17 +11,17 @@ if(empty($_POST['zip'])) {
 	exit;
 }
 
-$wf = new WildFile($mysqli,STORAGE,'files');
+$wf = new \TRP\WildFile\WildFile($mysqli,STORAGE,'files');
 
 $zip = $wf->zip();
 foreach($_POST['zip'] as $id) {
-	$zip->add($id);
+	$zip->add((int) $id);
 }
 $zip->close();
 
-header('Content-Type: application/zip');
-header('Content-Length: '.$zip->size);
-header('Content-Disposition: attachment; filename="wf-download.zip"');
+\TRP\WildFile\Header::type($zip->type);
+\TRP\WildFile\Header::size((int) $zip->size);
+\TRP\WildFile\Header::filename('wf-download.zip',true);
 
 $zip->output();
 $zip->unlink();
